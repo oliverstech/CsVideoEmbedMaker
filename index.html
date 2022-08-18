@@ -94,8 +94,9 @@ input {
 }
 
     function copy() {
-        var linkbox = document.querySelector('#finallinkbox').value;
-        navigator.clipboard.writeText(linkbox);
+        var linkbox = document.querySelector('#finallinkbox');
+        linkbox.select();
+        document.execCommand('copy');
         console.log("Copied to clipboard");
     }
 
