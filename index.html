@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <title>Video Embed Maker for WinForms</title>
+        <style>
+            body
+{
+text-align:center;
+}
+
+#container
+{
+width:800px; /* specify your width here */
+margin:0 auto;
+}
+
+#box
+{
+width:1000px;
+height:200px;
+text-align:left;
+font-family: 'Microsoft Jhenghei';
+}
+
+input {
+    display: inline-block;
+}
+        </style>
+    </head>
+
+    <div id="container">
+
+        <div id="box">
+            <h1>Video Embed Maker</h1>
+            <h2>For WinForms</h2>
+            <p>This is a tool to generate embed links for usage within WinForms. For help, visit the <a href="https://docs.otcapi.ml/winform-video">documentation</a>.</p>
+
+            <label>Video URL: </label> <input id="vidurl" size="50"></input>
+            <br><br>
+            <label>Width: </label> <input id="width" size="2"></input>
+            <br><br>
+            <label>Height: </label> <input id="height" size="2"></input>
+            <br><br>
+            <label>Background in Hex (Exclude #): </label> <input id="background" size="3"></input>
+            <br><br>
+            <input type="checkbox" id="controls" name="controls" value="true">            
+            <label for="controls"> Show controls?</label><br>
+            <br>
+            <input type="checkbox" id="autoplay" name="autoplay" value="true">            
+            <label for="autoplay"> Automatically play video?</label><br>
+            <br><br>
+            <button onclick="begin()">Generate Link</button>
+            <input readonly id="finallinkbox" placeholder="Final link will show here" size="50"></input>
+            <button onclick="copy()">Copy to clipboard</button>
+        </div> <!-- END BOX -->
+        
+        </div> <!-- END CONTAINER -->
+
+</html>
+
+<script>
+    function begin() {
+
+    var vidurl = document.querySelector('#vidurl').value;
+    var width = document.querySelector('#width').value;
+    var height = document.querySelector('#height').value;
+    var background = document.querySelector('#background').value;
+
+    const cb = document.querySelector('#controls');
+    var controls = cb.checked;
+
+    const cb2 = document.querySelector('#autoplay');
+    var autoplay = cb2.checked;
+    
+    console.log('Video URL: ' + vidurl);
+    console.log('Width: ' + width);
+    console.log('Height: ' + height);
+    console.log('Controls: ' + controls);
+    console.log('Autoplay: ' + autoplay);
+
+    if (vidurl.length == 0 || !vidurl || width.length == 0 || !width || height.length == 0 || !height) {
+        alert("Please fill in all the fields!");
+    }
+    else if (isNaN(width) || isNaN(height)) {
+        alert("Width and Height must be numbers!");
+    }
+    else {
+    var finallink = `https://vid.otcapi.ml/?video=${vidurl}&width=${width}&height=${height}&controls=${controls}&autoplay=${autoplay}&background=${background}`;
+
+    document.querySelector('#finallinkbox').value = finallink;
+    } 
+}
+
+    function copy() {
+        var linkbox = document.querySelector('#finallinkbox').value;
+        navigator.clipboard.writeText(linkbox);
+        console.log("Copied to clipboard");
+    }
+
+</script>
+
