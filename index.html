@@ -77,7 +77,10 @@ input {
     console.log('Controls: ' + controls);
     console.log('Autoplay: ' + autoplay);
 
-    if (vidurl.length == 0 || !vidurl || width.length == 0 || !width || height.length == 0 || !height) {
+    if (!vidurl.startsWith("http")) {
+    alert("Video link is invalid!");
+    }
+    else if (vidurl.length == 0 || !vidurl || width.length == 0 || !width || height.length == 0 || !height) {
         alert("Please fill in all the fields!");
     }
     else if (isNaN(width) || isNaN(height)) {
